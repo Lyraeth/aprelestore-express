@@ -29,3 +29,19 @@ model Post {
     author    User    @relation(fields: [authorId], references: [id])
     authorId  Int
 }
+
+model Application {
+    id          Int     @id @default(autoincrement())
+    name        String  @unique
+    description String?
+    plans       Plan[]
+}
+
+model Plan {
+    id            Int         @id @default(autoincrement())
+    duration      String
+    price         Float
+    note          String?
+    application   Application @relation(fields: [applicationId], references: [id])
+    applicationId Int
+}
